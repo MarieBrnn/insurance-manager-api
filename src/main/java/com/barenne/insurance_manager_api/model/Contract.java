@@ -3,17 +3,16 @@ package com.barenne.insurance_manager_api.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -32,8 +31,8 @@ public class Contract {
 
     private LocalDate endDate;
 
-    @NotNull(message = "Cost amout cannot be null")
-    @Positive(message = "Cost amout must be positive")
+    @NotNull(message = "Cost amount cannot be null")
+    @Positive(message = "Cost amount must be positive")
     private BigDecimal costAmount;
 
     @NotNull
@@ -43,19 +42,27 @@ public class Contract {
     @NotNull
     private LocalDateTime updatedAt;
 
+    @Transient
+    private boolean skipAutoUpdate;
+
     @PrePersist
     protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
 
-        if(this.startDate == null) {
-            this.startDate=LocalDate.now();
+        if (!skipAutoUpdate) {
+            this.createdAt = LocalDateTime.now();
+            this.updatedAt = LocalDateTime.now();
+
+            if (this.startDate == null) {
+                this.startDate = LocalDate.now();
+            }
         }
     }
 
     @PreUpdate
     protected void onUpdate(){
-        this.updatedAt = LocalDateTime.now();
+        if (!skipAutoUpdate) {
+            this.updatedAt = LocalDateTime.now();
+        }
     }
 
     public Boolean isActive(){

@@ -2,7 +2,9 @@ package com.barenne.insurance_manager_api.repository;
 
 import com.barenne.insurance_manager_api.model.Contract;
 import com.barenne.insurance_manager_api.utils.Constants;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -40,10 +42,13 @@ public interface ContractRepository extends JpaRepository<Contract, Long> {
     );
 
     //Update endDate of all the contracts of a client
+    @Modifying
+    @Transactional
     @Query(Constants.UPDATE_ALL_CONTRACTS_ENDDATE_BY_CLIENT_ID)
     void updateAllContractsEndDateByClientId(
             @Param("clientId") Long clientId,
-            @Param("endDate") LocalDate endDate
+            @Param("endDate") LocalDate endDate,
+            @Param("currentDate") LocalDate currentDate
     );
 
 }

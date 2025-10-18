@@ -24,11 +24,13 @@ public class ClientRepositoryTest {
 
     @Test
     public void testSavePerson() {
-        Person person = new Person();
-        person.setName("TestName");
-        person.setEmail("test@email.com");
-        person.setPhone("+41123456789");
-        person.setBirthDate(LocalDate.of(1995, 1, 1));
+        Person person = Person.builder()
+                .id(null)
+                .name("TestName")
+                .email("test@email.com")
+                .phone("+41123456789")
+                .birthDate(LocalDate.of(1995, 1, 1))
+                .build();
 
         //Save
         Person savedPerson = personRepository.save(person);

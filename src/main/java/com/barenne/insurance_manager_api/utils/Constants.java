@@ -11,5 +11,5 @@ public class Constants {
             "SELECT SUM(c.costAmount) FROM Contract c WHERE c.client.id= :clientId AND (c.endDate IS NULL OR c.endDate > :currentDate)";
 
     public static final String UPDATE_ALL_CONTRACTS_ENDDATE_BY_CLIENT_ID =
-            "UPDATE Contract c SET c.endDate = :endDate WHERE c.client.id = :clientId AND (c.endDate IS NULL OR c.endDate > : currentDate)";
+            "UPDATE Contract c SET c.endDate = :endDate WHERE c.client.id = :clientId AND (c.endDate IS NULL OR c.endDate > :currentDate)";
 }
