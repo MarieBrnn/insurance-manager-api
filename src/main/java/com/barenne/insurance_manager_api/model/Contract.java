@@ -34,7 +34,7 @@ public class Contract {
 
     @NotNull(message = "Cost amout cannot be null")
     @Positive(message = "Cost amout must be positive")
-    private BigDecimal costAmout;
+    private BigDecimal costAmount;
 
     @NotNull
     @Column(updatable = false)
@@ -61,7 +61,5 @@ public class Contract {
     public Boolean isActive(){
         return endDate == null || LocalDate.now().isBefore(endDate);
     }
-
-
 
 }

@@ -18,18 +18,19 @@ import java.util.List;
 @AllArgsConstructor
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
+@SequenceGenerator(name="client_seq", sequenceName = "client_seq", initialValue = 1, allocationSize = 1)
 @DiscriminatorColumn(name="client_type")
 public abstract class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_seq")
     private Long id;
 
     @NotBlank(message = "Name cannot be null")
     private String name;
 
     @NotBlank(message = "Phone number cannot be null")
-    @Pattern(regexp = "^\\+?[0-9]{10.15}$", message = "Invalid phone number format")
+    @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Invalid phone number format")
     private String phone;
 
     @NotBlank(message = "Email cannot be null")
