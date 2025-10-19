@@ -1,5 +1,6 @@
 package com.barenne.insurance_manager_api.model;
 
+import com.barenne.insurance_manager_api.repository.CompanyRepository;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
