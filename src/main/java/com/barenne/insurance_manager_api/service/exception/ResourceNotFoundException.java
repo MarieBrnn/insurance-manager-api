@@ -1,4 +1,4 @@
-package com.barenne.insurance_manager_api.utils;
+package com.barenne.insurance_manager_api.service.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 

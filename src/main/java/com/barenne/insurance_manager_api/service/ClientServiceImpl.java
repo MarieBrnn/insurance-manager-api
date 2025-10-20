@@ -6,7 +6,7 @@ import com.barenne.insurance_manager_api.model.Person;
 import com.barenne.insurance_manager_api.repository.ClientRepository;
 import com.barenne.insurance_manager_api.repository.CompanyRepository;
 import com.barenne.insurance_manager_api.repository.PersonRepository;
-import com.barenne.insurance_manager_api.utils.ResourceNotFoundException;
+import com.barenne.insurance_manager_api.service.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
