@@ -7,12 +7,14 @@ import com.barenne.insurance_manager_api.repository.ContractRepository;
 import com.barenne.insurance_manager_api.service.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class ContractServiceImpl implements ContractService {
 
     private final ContractRepository contractRepository;
