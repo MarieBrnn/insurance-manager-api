@@ -4,7 +4,6 @@ import com.barenne.insurance_manager_api.model.Company;
 import com.barenne.insurance_manager_api.model.Contract;
 import com.barenne.insurance_manager_api.model.Person;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
