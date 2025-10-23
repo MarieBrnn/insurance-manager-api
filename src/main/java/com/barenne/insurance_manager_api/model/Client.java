@@ -38,5 +38,6 @@ public abstract class Client {
     private String email;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Contract> contracts = new ArrayList<>();
 }

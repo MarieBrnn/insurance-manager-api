@@ -28,7 +28,7 @@ public class ContractController {
         this.contractService = contractService;
     }
 
-    @GetMapping("/clients/{clientId}/contracts")
+    @GetMapping("/clients/{clientId}")
     public ResponseEntity<List<ContractDto>> getActiveContractsByClientId(
             @PathVariable Long clientId,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime updateDate) {
@@ -49,7 +49,7 @@ public class ContractController {
         return ResponseEntity.ok(TotalCostDto.of(clientId, totalCost));
     }
 
-    @PostMapping("/clients/{clientId}/contracts")
+    @PostMapping("/clients/{clientId}")
     public ResponseEntity<ContractDto> createContract(@PathVariable Long clientId, @Valid @RequestBody ContractDto contractDto) {
         Contract contract = DtoConverter.convertToEntity(contractDto);
         Contract createdContract = contractService.createContract(clientId, contract);
