@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -16,11 +17,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PersonDtoTest {
 
     private static Validator validator;
+    private static ValidatorFactory factory;
 
     @BeforeAll
     public static void setupValidatorInstance() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
+    }
+
+    @AfterAll
+    public static void closeFactory() {
+        if (factory != null) {
+            factory.close();
+        }
     }
 
     @Test
