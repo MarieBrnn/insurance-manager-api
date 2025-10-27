@@ -45,8 +45,6 @@ public class ClientControllerTest {
 
     private Person person;
     private Company company;
-    private PersonDto personDto;
-    private CompanyDto companyDto;
 
     @BeforeEach
     public void setup() {
@@ -81,7 +79,7 @@ public class ClientControllerTest {
                 .build();
 
         // Create test DTOs
-        personDto = new PersonDto();
+        PersonDto personDto = new PersonDto();
         personDto.setId(1L);
         personDto.setName("John Doe");
         personDto.setPhone("+33612345678");
@@ -89,7 +87,7 @@ public class ClientControllerTest {
         personDto.setBirthDate(LocalDate.of(1990, 1, 1));
         personDto.setClientType("PERSON");
 
-        companyDto = new CompanyDto();
+        CompanyDto companyDto = new CompanyDto();
         companyDto.setId(2L);
         companyDto.setName("Acme Inc");
         companyDto.setPhone("+33612345679");
@@ -157,14 +155,12 @@ public class ClientControllerTest {
     }
 
     @Test
-    public void testGetClientById_NotFound() throws Exception {
+    public void testGetClientById_NotFound() {
         // Given
         when(clientService.getClientById(999L)).thenThrow(new ResourceNotFoundException("Client", 999L));
 
         // When & Then
-        assertThrows(ResourceNotFoundException.class, () -> {
-            clientController.getClientById(999L);
-        });
+        assertThrows(ResourceNotFoundException.class, () -> clientController.getClientById(999L));
 
         verify(clientService).getClientById(999L);
     }

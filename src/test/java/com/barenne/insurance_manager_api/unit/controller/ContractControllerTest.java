@@ -47,7 +47,6 @@ public class ContractControllerTest {
     private Client client;
     private Contract activeContract1;
     private Contract activeContract2;
-    private ContractDto contractDto;
     private LocalDateTime updateDate;
     private LocalDate currentDate;
 
@@ -97,7 +96,7 @@ public class ContractControllerTest {
                 .build();
 
         // Create DTO
-        contractDto = new ContractDto();
+        ContractDto contractDto = new ContractDto();
         contractDto.setId(1L);
         contractDto.setClientId(1L);
         contractDto.setStartDate(currentDate.minusMonths(2));
@@ -165,15 +164,13 @@ public class ContractControllerTest {
     }
 
     @Test
-    public void testGetActiveContractsByClientId_ClientNotFound() throws Exception {
+    public void testGetActiveContractsByClientId_ClientNotFound() {
         // Given
         when(contractService.getActiveContractsByClientId(999L))
                 .thenThrow(new ResourceNotFoundException("Client", 999L));
 
         // When & Then
-        assertThrows(ResourceNotFoundException.class, () -> {
-            contractController.getActiveContractsByClientId(999L, null);
-        });
+        assertThrows(ResourceNotFoundException.class, () -> contractController.getActiveContractsByClientId(999L, null));
 
         verify(contractService).getActiveContractsByClientId(999L);
     }
@@ -212,7 +209,7 @@ public class ContractControllerTest {
     }
 
     @Test
-    public void testCreateContract_ClientNotFound() throws Exception {
+    public void testCreateContract_ClientNotFound() {
         // Given
         ContractDto newContractDto = new ContractDto();
         newContractDto.setStartDate(currentDate);
@@ -225,9 +222,7 @@ public class ContractControllerTest {
                 .thenThrow(new ResourceNotFoundException("Client", 999L));
 
         // When & Then
-        assertThrows(ResourceNotFoundException.class, () -> {
-            contractController.createContract(999L, newContractDto);
-        });
+        assertThrows(ResourceNotFoundException.class, () -> contractController.createContract(999L, newContractDto));
 
         verify(contractService).createContract(eq(999L), any(Contract.class));
     }
@@ -262,7 +257,7 @@ public class ContractControllerTest {
     }
 
     @Test
-    public void testUpdateContractCostAmount_ContractNotFound() throws Exception {
+    public void testUpdateContractCostAmount_ContractNotFound() {
         // Given
         BigDecimal newCostAmount = new BigDecimal("5000.00");
 
@@ -270,9 +265,7 @@ public class ContractControllerTest {
                 .thenThrow(new ResourceNotFoundException("Contract", 999L));
 
         // When & Then
-        assertThrows(ResourceNotFoundException.class, () -> {
-            contractController.updateContractCostAmount(999L, newCostAmount);
-        });
+        assertThrows(ResourceNotFoundException.class, () -> contractController.updateContractCostAmount(999L, newCostAmount));
 
         verify(contractService).updateContractCostAmount(eq(999L), any(BigDecimal.class));
     }
